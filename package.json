@@ -1,0 +1,22 @@
+{
+  "name": "rest-api-student",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run swagger-gen && nodemon app -V",
+    "swagger-gen": "node swagger.js"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.7",
+    "sequelize": "^6.6.2",
+    "swagger-autogen": "^2.8.1",
+    "swagger-ui-express": "^4.1.6"
+  }
+}
