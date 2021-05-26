@@ -3,14 +3,16 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const cors = require('cors')
+const cors = require('cors');
+
+const app = express();
+
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger.json');
 
 const rootRouter = require('./routes'); // default index.js selected
 
-const app = express();
-const db = require('./models'); // default index.js selected
+const db = require('./persistency/models'); // default index.js selected
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -18,8 +20,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
 
-app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+//app.get('/students',(req,res)=>{res.send('merhaba')})
 app.use('/', rootRouter);
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -37,10 +40,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3000, async ()=>{
-  console.log('listening on port 3000');
-  await db.sequelize.sync();
-  console.log ('connected to local DB');
+app.listen(3000, async () => {
+    console.log('listening on port 3000');
+    await db.sequelize.sync();
+    console.log('connected to local DB');
 })
 
 module.exports = app;

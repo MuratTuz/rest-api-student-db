@@ -7,7 +7,7 @@
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
+    "username": "vscode_murat",
     "password": "12345678",
     "database": "modul3_school",
     "host": "127.0.0.1",

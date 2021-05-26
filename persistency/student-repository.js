@@ -1,15 +1,15 @@
 
 
-const db = require('../models'); // no need to assert models/index.js
+const db = require('./models'); // no need to assert models/index.js
 const { Op } = require("sequelize");
 
 exports.getAll = async () => {
     // if { raw: true } this object is used inside findAll then we get unfiltered results
     // that toJSON() func. inside movie model does not make sense.
     return await db.Student.findAll({
-        attributes: ['firstname', 'lastname', 'classname', 'age'],
+        attributes: ['id','firstname', 'lastname', 'classname', 'age'],
         order: [
-            ['age', 'ASC']
+            ['id', 'DESC']
         ]
     });
 }
@@ -32,16 +32,17 @@ exports.getByName = async (name) => {
 });
 }
 
-exports.register = async ({firstname, lastname, classname, age}) => { 
-    const[student, created] = await db.Movies.findOrCreate({
-      where: {
-    [Op.and]: [
-      { firstname },
-      { lastname }
-    ]
-  },
-    defaults: {firstname, lastname, classname, age}
-    });
+exports.register = async ({ firstname, lastname, classname, age }) => {
+    const[student, created] = await db.Student.findOrCreate({
+        // if there exists a student who has the same name existed in database, so that refuse it
+        where: {
+            [Op.and]: [ 
+                { firstname },
+                { lastname }
+            ]
+        },
+        defaults: { firstname, lastname, classname, age } // firstname and lastname come from where clause
+        });
     if (created) {
         return student;
     } else {

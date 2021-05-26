@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const service = require('../services/student-service');
+const utility = require('../services/utility');
 
 router.get('/', async function(req, res, next) {
   //#swagger.tags = ['Student']
@@ -11,8 +12,8 @@ router.get('/', async function(req, res, next) {
   if (studentList) {
     /*
     #swagger.responses[200] = {
-     schema: { $ref: '#/definitions/Student' },
-     description: 'All students'
+     schema: [{ $ref: '#/definitions/Student' }],
+     description: 'An array of the all students'
     }
    */
     res.send(studentList)
@@ -22,7 +23,7 @@ router.get('/', async function(req, res, next) {
   
 });
 
-router.get('/:name', async function (req, res, next) {
+router.get('/name/:name', async function (req, res, next) {
   //#swagger.tags = ['Student']
   //#swagger.description = 'GET student by firstname or lastname'
   const name = req.params.name;
@@ -49,7 +50,7 @@ router.get('/:name', async function (req, res, next) {
   else res.sendStatus(404);
 });
 
-router.get('/:id', async function (req, res, next) {
+router.get('/id/:id', async function (req, res, next) {
   //#swagger.tags = ['Student']
   //#swagger.description = 'GET student by id'
   const id = Number(req.params.name);
@@ -77,19 +78,29 @@ router.get('/:id', async function (req, res, next) {
 });
 
 router.post('/', async function (req, res, next) {
-  //#swagger.tags = ['Student']
-  //#swagger.description = 'Register a new student'
+  /*
+  #swagger.tags = ['Student']
+  #swagger.description = 'Register a new student'
+   */
   const newStudent = req.body;
-  const result = await service.registerStudent(newStudent);
-  /* 
+  /*
   #swagger.parameters['newStudent'] = {
       in: 'body',
       description: "New student data",
       required: true,
       type: 'object',
-      schema: { $ref: "#/definitions/Student" }
+      schema:{
+      "firstname": "Tom",
+      "lastname": "Clement",
+      "classname": "B2",
+      "age": 7
+      }
     } 
   */
+    
+  console.log('reouter ',req)
+  const result = await service.registerStudent(newStudent);
+
   if (!utility.isEmpty(result)){   
     /*
     #swagger.responses[201] = {
@@ -104,32 +115,38 @@ router.post('/', async function (req, res, next) {
 });
 
 router.put('/:id', async function (req, res, next) {
-  //#swagger.tags = ['Student']
-  //#swagger.description = 'Update a stundet data'
-  const studentId = Number(req.params.id);
   /*
-  #swagger.parameters['id'] = {
-    in: 'path',
-    description: 'Student id existed in the database',
-    required: true,
-    type: 'integer'
-  }
+    #swagger.tags = ['Student']
+    #swagger.description = 'Update a stundet data'
+  */
+  const studentId = Number(req.params.id);
+  /* 
+    #swagger.parameters['id'] = {
+      in: 'path',
+      description: 'Student id existed in the database',
+      required: true,
+      type: 'integer'
+    }
   */
   const newStudent = req.body;
-    /* 
-    #swagger.parameters['newStudent'] = {
-      in: 'body',
-      description: 'New data for updating an existed student',
-      required: true,
-      type: 'object',
-      schema:{
-            "firstname": "Tom",
-            "lastname": "Clement",
-            "classname": "B2",
-            "age": 8
-        }
-    } 
+  /* 
+  #swagger.parameters['newStudent'] = {
+    in: 'body',
+    description: 'New data for updating an existed student',
+    required: true,
+    type: 'object',
+    schema:{
+          "firstname": "Tom",
+          "lastname": "Clement",
+          "classname": "B2",
+          "age": 7
+      }
+  } 
   */
+
+  console.log(req.params)
+  console.log(req.body)
+
   const updatedStudent = await service.updateStudentById(studentId, newStudent);
   /*
   #swagger.responses[201] = {

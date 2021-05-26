@@ -17,6 +17,7 @@ exports.getStudentById = async (id) => {
 
 exports.registerStudent = async (newStudent) => {
     if (utility.isStudentExist(newStudent)) {
+        console.log('service : ',newStudent)
         return await studentRepository.register(newStudent)
     } else {
         return {}
@@ -27,6 +28,7 @@ exports.updateStudentById = async (studentId, newStudent) => {
     if (utility.isStudentExist(newStudent)) {
         return await studentRepository.update(studentId, newStudent)
     } else {
+        console.log('sayfa yok')
         return {}
     }
 }

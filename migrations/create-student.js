@@ -1,18 +1,18 @@
 'use strict';
 
-const {DataTypes} = require('sequelize');
+const { DataTypes } = require('sequelize');
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('students', {
+  up: async (queryInterface) => {
+    await queryInterface.createTable('murat_students', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       uuid: {
           type: DataTypes.UUID,
-          defaultValue: DataTypes.UUIDV4, // Or Sequelize.UUIDV1
+          defaultValue: DataTypes.UUIDV4, // Or DataTypes.UUIDV1
           // Comments can only be added to columns in MySQL, MariaDB, PostgreSQL and MSSQL
           comment: 'This uuid is used as an extra id, so this is not a primary key or primary id'
       },
@@ -26,7 +26,7 @@ module.exports = {
         }
       },
       lastname: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notNull: true,
@@ -35,7 +35,7 @@ module.exports = {
         }
       },
       classname: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
                 allowNull: false,
         validate: {
           notNull: true,
@@ -44,19 +44,19 @@ module.exports = {
         }
       },
       age: {
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       }
     });
   },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('students');
+  down: async (queryInterface) => {
+    await queryInterface.dropTable('murat_students');
   }
 };

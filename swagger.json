@@ -24,14 +24,6 @@
     "application.json"
   ],
   "paths": {
-    "/students": {
-      "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
     "/students/": {
       "get": {
         "tags": [
@@ -42,9 +34,15 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/Student"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Student"
+              },
+              "xml": {
+                "name": "main"
+              }
             },
-            "description": "All students"
+            "description": "An array of the all students"
           },
           "404": {
             "description": "Not Found"
@@ -64,7 +62,25 @@
             "required": true,
             "type": "object",
             "schema": {
-              "$ref": "#/definitions/Student"
+              "type": "object",
+              "properties": {
+                "firstname": {
+                  "type": "string",
+                  "example": "Tom"
+                },
+                "lastname": {
+                  "type": "string",
+                  "example": "Clement"
+                },
+                "classname": {
+                  "type": "string",
+                  "example": "B2"
+                },
+                "age": {
+                  "type": "number",
+                  "example": 7
+                }
+              }
             }
           }
         ],
@@ -81,7 +97,7 @@
         }
       }
     },
-    "/students/{name}": {
+    "/students/name/{name}": {
       "get": {
         "tags": [
           "Student"
@@ -109,7 +125,7 @@
         }
       }
     },
-    "/students/{id}": {
+    "/students/id/{id}": {
       "get": {
         "tags": [
           "Student"
@@ -135,7 +151,9 @@
             "description": "Not Found"
           }
         }
-      },
+      }
+    },
+    "/students/{id}": {
       "put": {
         "tags": [
           "Student"
@@ -172,7 +190,7 @@
                 },
                 "age": {
                   "type": "number",
-                  "example": 8
+                  "example": 7
                 }
               }
             }

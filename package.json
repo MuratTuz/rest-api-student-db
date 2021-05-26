@@ -16,7 +16,7 @@
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.7",
     "sequelize": "^6.6.2",
-    "swagger-autogen": "^2.8.1",
+    "swagger-autogen": "^2.9.1",
     "swagger-ui-express": "^4.1.6"
   }
 }
