@@ -1,6 +1,6 @@
 
 
-const db = require('./models'); // no need to assert models/index.js
+const db = require('../models'); // no need to assert models/index.js
 const { Op } = require("sequelize");
 
 exports.getAll = async () => {

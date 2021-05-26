@@ -43,7 +43,13 @@ Run the project and access the documentation at:
 [http://localhost:3000/doc](http://localhost:3000/doc)
 
 ## Screenshots
-See the result after construction:
+
+Data Model:
+
+![ScreenShot](/public/images/ClassDiagram1.png)
+
+
+API Documentation:
 
 ![ScreenShot](/public/images/view_1.png)
 
