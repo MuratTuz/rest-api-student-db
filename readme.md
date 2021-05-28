@@ -13,16 +13,18 @@ sequelize model:generate --name table_name --attributes movieId:integer,duration
 sequelize seed:generate --name initial_bulk_data_file_name
 ```
 
-Use the command below to create tables in the database:
+Use one of the commands below to create tables in the database:
 
 ```bash
-$ NODE_ENV=test sequelize db:migrate 
+NODE_ENV=test sequelize db:migrate 
+sequelize db:migrate --env test 
 ```
 
-Use the command below for initializing the database for the first time with bulk datas. There must be a Mysql database started in order to use this command.
+Use one of the commands below for initializing the database for the first time with bulk datas. There must be a Mysql database started in order to use this command.
 
 ```bash
 NODE_ENV=test sequelize db:seed:all
+sequelize db:seed:all --env test
 ```
 
 Should any error, use the debug mode for finding the problem.
@@ -48,10 +50,12 @@ Data Model:
 
 ![ScreenShot](/public/images/ClassDiagram1.png)
 
-
 API Documentation:
 
-![ScreenShot](/public/images/view_1.png)
+![ScreenShot](/public/images/Swagger_Student.png)
+![ScreenShot](/public/images/Swagger_Teacher_Lecture.png)
+![ScreenShot](/public/images/Model_Student.png)
+![ScreenShot](/public/images/Model_Teacher_Lecture.png)
 
 
 ## License

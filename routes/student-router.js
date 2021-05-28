@@ -6,7 +6,7 @@ const utility = require('../services/utility');
 
 router.get('/', async function(req, res, next) {
   //#swagger.tags = ['Student']
-  //#swagger.description = 'GET all students'
+  //#swagger.description = 'GET all students with their courses and teachers'
   const studentList = await service.getAllStudents();
 
   if (studentList) {
@@ -25,7 +25,7 @@ router.get('/', async function(req, res, next) {
 
 router.get('/name/:name', async function (req, res, next) {
   //#swagger.tags = ['Student']
-  //#swagger.description = 'GET student by firstname or lastname'
+  //#swagger.description = 'GET student by firstname or lastname with their courses and teachers'
   const name = req.params.name;
   /*
   #swagger.parameters['name'] = {
@@ -52,8 +52,8 @@ router.get('/name/:name', async function (req, res, next) {
 
 router.get('/id/:id', async function (req, res, next) {
   //#swagger.tags = ['Student']
-  //#swagger.description = 'GET student by id'
-  const id = Number(req.params.name);
+  //#swagger.description = 'GET student by id with their courses and teachers'
+  const id = Number(req.params.id);
   /*
   #swagger.parameters['id'] = {
     in: 'path',

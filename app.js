@@ -12,7 +12,7 @@ const swaggerFile = require('./swagger.json');
 
 const rootRouter = require('./routes'); // default index.js selected
 
-const db = require('./models'); // default index.js selected
+const db = require('./persistency/models'); // default index.js selected
 
 app.use(logger('dev'));
 app.use(express.json());

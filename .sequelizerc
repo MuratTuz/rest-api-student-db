@@ -1,0 +1,16 @@
+
+
+/*
+    This file is for the options for the usage of sequelize cli
+*/
+
+const path = require('path');
+
+module.exports = {
+  'config': path.resolve('persistency/config', 'config.json'),
+  'models-path': path.resolve('persistency', 'models'),
+  'seeders-path': path.resolve('persistency', 'seeders'),
+  'migrations-path': path.resolve('persistency', 'migrations')
+}
+
+
